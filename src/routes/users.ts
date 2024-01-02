@@ -10,6 +10,7 @@ import { isAdmin } from "../middleware/is-admin";
 import { isAdminOrUser } from "../middleware/is-admin-or-user";
 import { isUser } from "../middleware/is-user";
 import { isBusiness } from "../middleware/is-business";
+import { validateToken } from "../middleware/validate-token";
 
 const router = Router();
 
@@ -38,7 +39,7 @@ router.post("/login", validateLogin, async (req, res, next) => {
 });
 
 // get all users
-router.get("/", isAdmin, async (req, res, next) => {
+router.get("/", isAdmin, validateToken, async (req, res, next) => {
   try {
     const allUsers = await User.find();
 
@@ -49,17 +50,23 @@ router.get("/", isAdmin, async (req, res, next) => {
 });
 
 // update user
-router.put("/:id", isUser, validateUserRegistration, async (req, res, next) => {
-  try {
-    const savedUser = await User.updateOne({ _id: req.params.id }, req.body);
-    res.json({ message: "OK" });
-  } catch (e) {
-    next(e);
+router.put(
+  "/:id",
+  isUser,
+  validateUserRegistration,
+  validateToken,
+  async (req, res, next) => {
+    try {
+      const savedUser = await User.updateOne({ _id: req.params.id }, req.body);
+      res.json({ message: "OK" });
+    } catch (e) {
+      next(e);
+    }
   }
-});
+);
 
-// get user
-router.get("/:id", isAdminOrUser, async (req, res, next) => {
+// get user by id
+router.get("/:id", isAdminOrUser, validateToken, async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = (await User.findById(id).lean()) as IUser;
@@ -71,7 +78,7 @@ router.get("/:id", isAdminOrUser, async (req, res, next) => {
 });
 
 // change status
-router.patch("/:id", isAdminOrUser, async (req, res, next) => {
+router.patch("/:id", isAdminOrUser, validateToken, async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -83,7 +90,7 @@ router.patch("/:id", isAdminOrUser, async (req, res, next) => {
 });
 
 // delete user
-router.delete("/:id", isAdminOrUser, async (req, res, next) => {
+router.delete("/:id", isAdminOrUser, validateToken, async (req, res, next) => {
   try {
     const { id } = req.params;
 
