@@ -2,6 +2,8 @@
 
 Welcome to the Business Card Site server! This server provides functionality for creating and managing user accounts, as well as creating, editing, and deleting business cards.
 
+When downloading the project, download the node module file using the command: pnpm i / npm i
+
 ## Usage
 
 ### User Operations
