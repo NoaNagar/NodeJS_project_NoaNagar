@@ -1,0 +1,66 @@
+### get all cards
+GET http://localhost:8080/api/v1/cards
+
+### create new card
+POST http://localhost:8080/api/v1/cards
+Authorization: bearer 
+# add token
+Content-Type: application/json
+
+{
+"title":"Test Card",
+"subtitle":"the card number 1",
+"description":"walla walla walla",
+"phone":"054-8339879",
+"email":"card1@gmail.com",
+"address":{
+  "street": "123 Main St",
+    "city": "Anytown",
+    "country": "Israel",
+    "houseNumber": 20,
+    "zip": "12345"
+}
+}
+
+### get my cards
+GET http://localhost:8080/api/v1/cards/myCards
+Authorization: bearer 
+# add token
+Content-Type: application/json
+
+### get card by id
+GET http://localhost:8080/api/v1/cards/cardId
+
+### edit card
+PUT http://localhost:8080/api/v1/cards/cardId
+Authorization: bearer 
+# add token
+Content-Type: application/json
+
+{
+"title":"Test2",
+"subtitle":"the card number 1",
+"description":"walla walla walla",
+"phone":"054-8339879",
+"email":"card1@gmail.com",
+"address":{
+  "street": "123 Main St",
+    "city": "Anytown",
+    "country": "Israel",
+    "houseNumber": 10,
+    "zip": "12345"
+}
+}
+
+### like a card
+PATCH http://localhost:8080/api/v1/cards/cardId 
+Authorization: bearer 
+# add token
+
+
+
+### delete card
+DELETE http://localhost:8080/api/v1/cards/cardId
+Authorization: bearer 
+# add token
+Content-Type: application/json

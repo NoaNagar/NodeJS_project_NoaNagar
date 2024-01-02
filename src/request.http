@@ -1,0 +1,90 @@
+  ### GET All users:
+GET http://localhost:8080/api/v1/users
+Authorization: bearer 
+# add token
+
+### Add a user:
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "name": {
+    "first": "Test",
+    "last": "Testy"
+  },
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "country": "Israel",
+    "houseNumber": 20,
+    "zip": "12345"
+  },
+  "image": {
+    "alt": "user-profile",
+    "url": "https://picsum.photos/200/300"
+  },
+  "phone": "050-8123091",
+  "email": "test@batcave.com",
+  "isBusiness": true,
+  "password": "123456aA!" 
+}
+
+
+### Login:
+POST http://localhost:8080/api/v1/users/login
+Content-Type: application/json
+
+{
+  "email": "Admin@batcave.com",
+  "password": "123456aA!"
+}
+
+
+### get user by id with JWT :
+GET http://localhost:8080/api/v1/users/userId
+Authorization: bearer 
+# add token
+
+### GET user by admin
+GET http://localhost:8080/api/v1/users/userId
+Authorization: bearer 
+# add token
+
+### PUT update uaer:
+PUT http://localhost:8080/api/v1/users/userId
+Authorization: bearer 
+# add token
+Content-Type: application/json
+
+{
+  "name": {
+    "first": "Test2",
+    "last": "Testy"
+  },
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "country": "Israel",
+    "houseNumber": 20,
+    "zip": "12345"
+  },
+  "image": {
+    "alt": "user-profile",
+    "url": "https://picsum.photos/200/300"
+  },
+  "phone": "050-8123091",
+  "email": "test@batcave.com",
+  "isBusiness": true,
+  "password": "123456aA!" 
+}
+
+### change status of user
+PATCH http://localhost:8080/api/v1/users/userId
+Authorization: bearer 
+# add token
+Content-Type: application/json
+
+### DELETE user
+DELETE http://localhost:8080/api/v1/users/userId
+Authorization: bearer 
+# add token
